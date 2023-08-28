@@ -14,7 +14,7 @@ class HelloWorldController {
 
     @GetMapping(path = ["/hello-world-bean"])
     fun helloWorldBean(): HelloWorldBean {
-        return HelloWorldBean()
+        return HelloWorldBean("Hi")
     }
 
     @GetMapping(path = ["/hello-world/path-var/{name}"])
