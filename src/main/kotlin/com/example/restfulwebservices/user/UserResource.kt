@@ -18,7 +18,7 @@ class UserResource (
     fun retrieveUserById(@PathVariable id: Int ): User? {
         val user: User? = service.find(id)
 
-        return user
+        return user ?: throw UserNotFoundException("id= $id")
     }
 
     @PostMapping("/users")
