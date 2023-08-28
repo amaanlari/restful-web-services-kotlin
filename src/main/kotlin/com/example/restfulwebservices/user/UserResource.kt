@@ -1,9 +1,9 @@
 package com.example.restfulwebservices.user
 
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RestController
-import java.time.LocalDate
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder
+import java.net.URI
 
 @RestController
 class UserResource (
@@ -15,5 +15,20 @@ class UserResource (
     }
 
     @GetMapping("/users/{id}")
-    fun retrieveUserById(@PathVariable id: Int ) = service.find(id = id)
+    fun retrieveUserById(@PathVariable id: Int ): User? {
+        val user: User? = service.find(id)
+
+        return user
+    }
+
+    @PostMapping("/users")
+    fun createUser(@RequestBody user: User) : ResponseEntity<User> {
+        service.save(user)
+        val location: URI = ServletUriComponentsBuilder
+            .fromCurrentRequest()
+            .path("/{id}")
+            .buildAndExpand(user.id)
+            .toUri()
+        return ResponseEntity.created(location).build()
+    }
 }
