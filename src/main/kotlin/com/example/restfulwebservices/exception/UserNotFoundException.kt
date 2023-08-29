@@ -1,11 +1,9 @@
-package com.example.restfulwebservices.user
+package com.example.restfulwebservices.exception
 
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.ResponseStatus
 
 @ResponseStatus(
-    value = HttpStatus.NOT_FOUND,
-    code = HttpStatus.NOT_FOUND,
-    reason = "No user found which matches the provided id"
+    code = HttpStatus.NOT_FOUND
 )
 class UserNotFoundException(override val message: String?) : RuntimeException()
