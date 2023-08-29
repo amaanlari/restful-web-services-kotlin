@@ -1,7 +1,9 @@
 package com.example.restfulwebservices.user
 
+import com.example.restfulwebservices.exception.UserNotFoundException
 import org.springframework.stereotype.Component
 import java.time.LocalDate
+import java.util.function.Predicate
 
 @Component
 class UserDaoService {
@@ -22,7 +24,12 @@ class UserDaoService {
     fun find(id: Int): User? {
         return users.find{it.id == id}
     }
+
     fun save(user: User){
         users.add(user)
+    }
+
+    fun deleteById(id: Int){
+        users.removeIf{it.id == id}
     }
 }

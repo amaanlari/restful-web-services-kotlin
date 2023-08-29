@@ -7,6 +7,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder
 import java.net.URI
 
 @RestController
+@RequestMapping("/api/v1")
 class UserResource (
     val service: UserDaoService
 ){
@@ -31,5 +32,10 @@ class UserResource (
             .buildAndExpand(user.id)
             .toUri()
         return ResponseEntity.created(location).build()
+    }
+
+    @DeleteMapping("/users/{id}")
+    fun deleteUser(@PathVariable id: Int) {
+        service.deleteById(id)
     }
 }
