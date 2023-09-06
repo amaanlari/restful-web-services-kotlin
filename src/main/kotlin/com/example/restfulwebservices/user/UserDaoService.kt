@@ -1,9 +1,7 @@
 package com.example.restfulwebservices.user
 
-import com.example.restfulwebservices.exception.UserNotFoundException
 import org.springframework.stereotype.Component
 import java.time.LocalDate
-import java.util.function.Predicate
 
 @Component
 class UserDaoService {

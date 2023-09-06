@@ -1,6 +1,7 @@
 package com.example.restfulwebservices.user
 
 import com.example.restfulwebservices.exception.UserNotFoundException
+import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder
@@ -24,7 +25,7 @@ class UserResource (
     }
 
     @PostMapping("/users")
-    fun createUser(@RequestBody user: User) : ResponseEntity<User> {
+    fun createUser(@Valid @RequestBody user: User) : ResponseEntity<User> {
         service.save(user)
         val location: URI = ServletUriComponentsBuilder
             .fromCurrentRequest()
