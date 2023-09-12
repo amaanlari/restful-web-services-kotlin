@@ -15,9 +15,24 @@ class VersioningPersonController {
     fun gerSecondVersionOfPerson(): PersonV2 {
         return PersonV2(
             Name(
-            firstName = "Bob",
-            lastName = "Charlie"
+                firstName = "Bob",
+                lastName = "Charlie"
+            )
         )
+    }
+
+    @GetMapping(path = ["/person"], params = ["version=1"])
+    fun gerFirstVersionOfPersonRequestParam(): PersonV1 {
+        return PersonV1("Bob Charlie")
+    }
+
+    @GetMapping(path = ["/person"], params = ["version=2"])
+    fun gerSecondVersionOfPersonRequestParam(): PersonV2 {
+        return PersonV2(
+            Name(
+                firstName = "Bob",
+                lastName = "Charlie"
+            )
         )
     }
 }
