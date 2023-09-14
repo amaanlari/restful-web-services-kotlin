@@ -2,6 +2,10 @@ package com.example.restfulwebservices.user
 
 import com.example.restfulwebservices.exception.UserNotFoundException
 import jakarta.validation.Valid
+import org.springframework.hateoas.EntityModel
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder
@@ -18,10 +22,12 @@ class UserResource (
     }
 
     @GetMapping("/users/{id}")
-    fun retrieveUserById(@PathVariable id: Int ): User? {
-        val user: User? = service.find(id)
-
-        return user ?: throw UserNotFoundException("id= $id")
+    fun retrieveUserById(@PathVariable id: Int ): EntityModel<User> {
+        val user: User = service.find(id) ?: throw UserNotFoundException("id= $id")
+        val entityModel = EntityModel.of(user)
+        val link: WebMvcLinkBuilder = linkTo(methodOn(this::class.java).retrieveAllUsers())
+        entityModel.add(link.withRel("all-users"))
+        return entityModel
     }
 
     @PostMapping("/users")
