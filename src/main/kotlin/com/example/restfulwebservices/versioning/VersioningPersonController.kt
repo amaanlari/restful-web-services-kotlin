@@ -50,4 +50,20 @@ class VersioningPersonController {
             )
         )
     }
+
+//    application/vnd.lari.api-v1+json
+    @GetMapping(path = ["/person"], produces = ["application/vnd.lari.api-v1+json"])
+    fun gerFirstVersionOfPersonAcceptHeader(): PersonV1 {
+        return PersonV1("Bob Charlie")
+    }
+
+    @GetMapping(path = ["/person"], produces = ["application/vnd.lari.api-v2+json"])
+    fun gerSecondVersionOfPersonAcceptHeader(): PersonV2 {
+        return PersonV2(
+            Name(
+                firstName = "Bob",
+                lastName = "Charlie"
+            )
+        )
+    }
 }
