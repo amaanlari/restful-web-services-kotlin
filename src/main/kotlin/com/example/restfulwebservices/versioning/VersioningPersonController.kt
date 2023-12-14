@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RestController
 class VersioningPersonController {
 
     @GetMapping("/v1/person")
-    fun gerFirstVersionOfPerson(): PersonV1 {
+    fun getFirstVersionOfPerson(): PersonV1 {
         return PersonV1("Bob Charlie")
     }
 
     @GetMapping("/v2/person")
-    fun gerSecondVersionOfPerson(): PersonV2 {
+    fun getSecondVersionOfPerson(): PersonV2 {
         return PersonV2(
             Name(
                 firstName = "Bob",
@@ -22,12 +22,12 @@ class VersioningPersonController {
     }
 
     @GetMapping(path = ["/person"], params = ["version=1"])
-    fun gerFirstVersionOfPersonRequestParam(): PersonV1 {
+    fun getFirstVersionOfPersonRequestParam(): PersonV1 {
         return PersonV1("Bob Charlie")
     }
 
     @GetMapping(path = ["/person"], params = ["version=2"])
-    fun gerSecondVersionOfPersonRequestParam(): PersonV2 {
+    fun getSecondVersionOfPersonRequestParam(): PersonV2 {
         return PersonV2(
             Name(
                 firstName = "Bob",
@@ -37,12 +37,12 @@ class VersioningPersonController {
     }
 
     @GetMapping(path = ["/person/header"], headers = ["X-API-VERSION=1"])
-    fun gerFirstVersionOfPersonRequestHeader(): PersonV1 {
+    fun getFirstVersionOfPersonRequestHeader(): PersonV1 {
         return PersonV1("Bob Charlie")
     }
 
     @GetMapping(path = ["/person/header"], headers = ["X-API-VERSION=2"])
-    fun gerSecondVersionOfPersonRequestHeader(): PersonV2 {
+    fun getSecondVersionOfPersonRequestHeader(): PersonV2 {
         return PersonV2(
             Name(
                 firstName = "Bob",
@@ -53,12 +53,12 @@ class VersioningPersonController {
 
 //    application/vnd.lari.api-v1+json
     @GetMapping(path = ["/person"], produces = ["application/vnd.lari.api-v1+json"])
-    fun gerFirstVersionOfPersonAcceptHeader(): PersonV1 {
+    fun getFirstVersionOfPersonAcceptHeader(): PersonV1 {
         return PersonV1("Bob Charlie")
     }
 
     @GetMapping(path = ["/person"], produces = ["application/vnd.lari.api-v2+json"])
-    fun gerSecondVersionOfPersonAcceptHeader(): PersonV2 {
+    fun getSecondVersionOfPersonAcceptHeader(): PersonV2 {
         return PersonV2(
             Name(
                 firstName = "Bob",
